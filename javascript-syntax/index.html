@@ -1,0 +1,753 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Интерпретируй это!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=792, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="../shower/themes/bright/styles/screen.css">
+
+    <style>
+        .slide h2 {
+            margin: 0 0 18px; /* чтобы влезали 7 li + note */
+            }
+
+        .slide:after {
+            right: 45px;
+            text-align: right;
+            }
+
+        .slide.shout {
+            background: #fff;
+            }
+
+        .slide.shout h2 {
+            color: #000;
+            text-align: center;
+            font-size: 48px;
+            }
+        .slide.shout h2 a {
+            color: #52a2df
+            }
+
+        .columns {
+            display: flex;
+            }
+            .column {
+                flex: 1;
+                }
+
+        .slide pre {
+            margin-top: 45px;
+            }
+        .slide pre.fit {
+            margin-top: 0;
+            }
+
+        pre.nonum code:before {
+            content: none;
+            }
+
+        mark.ok {
+            color: #fff;
+            background: #0f0;
+            }
+
+        mark.error {
+            color: #fff;
+            background: #f00;
+            }
+
+        .slide table.fit {
+            line-height: 1.75;
+            font-size: 75%;
+            }
+
+        .slide span {
+            color: #999;
+            }
+
+        .slide blockquote + figcaption {
+            text-align: right;
+            }
+
+        .slide table i {
+            color: #d00;
+            font-weight: bold;
+            }
+        .fullscreen-pic img {
+            min-width: 100%;
+            min-height: 100%;
+            }
+    </style>
+</head>
+<body class="list">
+    <header class="caption">
+        <h1>Интерпретируй это!</h1>
+        <p>Некоторые особенности синтаксиса JavaScript</p>
+    </header>
+    <section class="slide cover" id="Cover"><div>
+        <h2>Интерпретируй это!</h2>
+        <p>
+            Некоторые особенности синтаксиса JavaScript<br/>
+            <a href="http://lastw.net">Влад Сапожников</a>, 2ГИС
+        </p>
+        <img src="pictures/cover.jpg" alt="">
+        <style>
+            #Cover h2 {
+                margin: 30px 0 0 0;
+                color: #333;
+                text-align: right;
+                font-size: 50px;
+                }
+            #Cover p {
+                margin: 10px 0 0;
+                text-align: right;
+                color: #333;
+                font-style: italic;
+                font-size: 20px;
+                }
+                #Cover p a {
+                    color: #666;
+                    }
+            #Cover img {
+                height: 100%;
+                right: 0;
+                left: auto;
+                }
+        </style>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Javascript</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Синтаксис</h2>
+        <ul>
+            <li>Токены</li>
+            <li>Инструкции</li>
+            <li>Выражения и операторы</li>
+            <li>ASI</li>
+        </ul>
+        <p class="note"><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-syntactic-grammar">ecma-262 # The Syntactic Grammar</a>, <br><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Lexical_grammar">mdn # Lexical grammar</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Инструкции</h2>
+        <ul>
+            <li>Поток выполнения (Block, break/continue, if/switch/try, ...)</li>
+            <li>Объявления (var, let, const)</li>
+            <li>Функции (function, return, function*/yield)</li>
+            <li>Итерации (for/while)</li>
+            <li>Прочее (debugger, label)</li>
+            <li>...</li>
+            <li>Выражение (<i>expression statement</i>)</li>
+        </ul>
+        <p class="note"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements">mdn # Statements</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Выражения</h2>
+        <ul>
+            <li>Первичные (this, function, [], {}, //, ())</li>
+            <li>Левосторонние (доступ к свойству, new)</li>
+            <li>Инкремент (++, --), унарные (delete, void, typeof, +, -, ~, !)</li>
+            <li>Арифметические, отношения/равенства, побитовые, логические</li>
+            <li>Тернарный оператор</li>
+            <li>Присваивание</li>
+            <li>Запятая</li>
+        </ul>
+        <p class="note"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators">mdn # Expressions and operators</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Выражения vs инструкции</h2>
+        <ol>
+            <li>Там, где ожидается инструкция, может быть выражение</li>
+            <li>Обратное неверно</li>
+        </ol>
+        <p class="note"><a href="http://www.2ality.com/2012/09/expressions-vs-statements.html">2ality # expressions vs statements</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <div class="columns">
+            <div class="column">
+                <h2>Инструкция</h2>
+                <pre class="nonum">
+                    <code>if (true) {</code>
+                    <code>    <mark>return 42;</mark></code>
+                    <code>}</code>
+                </pre>
+            </div>
+
+            <div class="next column">
+                <h2>Выражение</h2>
+                <pre class="nonum">
+                    <code>if (true) {</code>
+                    <code>    <mark>"hello world";</mark> <mark class="ok next">seems legit</mark></code>
+                    <code>}</code>
+                </pre>
+            </div>
+        </div>
+    </div></section>
+
+    <section class="slide"><div>
+        <div class="columns">
+            <div class="column">
+                <h2>Инструкция</h2>
+                <pre class="nonum">
+                    <code>foo( <mark>42</mark> )</code>
+                </pre>
+            </div>
+
+            <div class="next column">
+                <h2>Выражение</h2>
+                <pre class="nonum">
+                    <code>foo( <mark>if (true) {}</mark> )</code>
+                    <code class="next"><mark class="error">Unexpected token if</mark></code>
+                </pre>
+            </div>
+        </div>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Выражения и инструкции могут выглядеть одинаково</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>{} — литерал объекта?</h2>
+        <pre>
+            <code>{ <mark class="next">// блок</mark></code>
+            <code>    foo: bar(42) <mark class="next">// метка foo</mark></code>
+            <code>}</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>{} — литерал объекта!</h2>
+        <pre>
+            <code><mark>(</mark>{</code>
+            <code>    foo: bar(42)</code>
+            <code>}<mark>)</mark>.foo</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>function — функциональное выражение?</h2>
+        <pre>
+            <code>function foo() {</code>
+            <code>    bar(42)</code>
+            <code>}()</code>
+            <code class="next"><mark class="error">Unexpected token (</mark></code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>function — функциональное выражение!</h2>
+        <pre>
+            <code><mark>(</mark>function foo() {</code>
+            <code>    bar(42)</code>
+            <code>}<mark>)</mark>()</code>
+        </pre>
+        <p class="next">IIFE — immediately-invoked functional expression</p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Один и тот же код работает по-разному в контекстах выражения и инструкции</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>А выражения в контексте инструкции?</h2>
+        <pre class="nonum">
+            <code>ExpressionStatement:</code>
+            <code>[lookahead ∉ {</code>
+            <code>    <mark>{</mark>, <mark>function</mark>, <mark>class</mark>, <mark>let [</mark></code>
+            <code>}] Expression ;</code>
+        </pre>
+        <p class="note"><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-expression-statement">ecma-262 # Expression Statement</a></p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>ASI</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Что вернет функция?</h2>
+        <pre>
+            <code>(function foo() {</code>
+            <code>    return<mark class="next">;</mark></code>
+            <code>        1</code>
+            <code>        + 2</code>
+            <code>        + 3</code>
+            <code>})()</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Точка с запятой</h2>
+        <ul>
+            <li>За любой инструкцией следует <code>;</code> , кроме:
+                <ul>
+                    <li>Циклы (for, while)</li>
+                    <li>Ветвления (if, switch, try)</li>
+                    <li>Объявления функций (function)</li>
+                </ul>
+            </li>
+            <li>Empty: <code>;;;</code></li>
+            <li>Выражения: <code>"hello world"; foo(42);</code></li>
+        </ul>
+        <p class="note"><a href="http://www.2ality.com/2011/05/semicolon-insertion.html">2ality # Automatic semicolon insertion</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Автоматическая вставка?</h2>
+        <p>Парсер считает каждый новый токен частью текущей инструкции, если нет <code>;</code> , прерывающей её.</p>
+        <pre>
+            <code>var a = 1</code>
+            <code>(function(a) { console.log(a) })(a) <mark class="comment">// IIFE-ninja</mark></code>
+            <code class="next"><mark class="error">1 is not a function</mark></code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Исключение: токен не может продолжить инструкцию</h2>
+        <pre>
+            <code>var a = 1<mark>;</mark></code>
+            <code>console.log(a)</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Исключение: restricted productions</h2>
+        <table class="fit">
+        <tr>
+            <th>PostfixExpression</th>
+            <td>
+                LeftHandSideExpression <span>[no LineTerminator here]</span> <i>++</i> <br/>
+                LeftHandSideExpression <span>[no LineTerminator here]</span> <i>--</i>
+            </td>
+        </tr>
+        <tr>
+            <th>ContinueStatement</th>
+            <td>
+                <i>continue</i>; <br/>
+                continue <span>[no LineTerminator here]</span> LabelIdentifier ;
+            </td>
+        </tr>
+        <tr>
+            <th>BreakStatement</th>
+            <td>
+                <i>break</i>; <br/>
+                break <span>[no LineTerminator here]</span> LabelIdentifier ;
+            </td>
+        </tr>
+        <tr>
+            <th>ReturnStatement</th>
+            <td>
+                <i>return</i> <span>[no LineTerminator here]</span> Expression ; <br/>
+            </td>
+        </tr>
+        <tr>
+            <th>ThrowStatement</th>
+            <td>
+                <i>throw</i> <span>[no LineTerminator here]</span> Expression ;
+            </td>
+        </tr>
+        <tr>
+            <th>ArrowFunction</th>
+            <td>
+                ArrowParameters <span>[no LineTerminator here]</span> <i>=></i> ConciseBody
+            </td>
+        </tr>
+        <tr>
+            <th>YieldExpression</th>
+            <td>
+                <i>yield</i> <span>[no LineTerminator here]</span> * AssignmentExpression <br/>
+                yield <span>[no LineTerminator here]</span> AssignmentExpression ;
+            </td>
+        </tr>
+        </table>
+        <p class="note"><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-rules-of-automatic-semicolon-insertion">ecma-262 # Rules of Automatic Semicolon Insertion</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>PostfixExpression, например</h2>
+        <p>
+            LeftHandSideExpression <span>[no LineTerminator here]</span> ++ <br/>
+            LeftHandSideExpression <span>[no LineTerminator here]</span> --
+        </p>
+        <pre>
+            <code>foo<mark class="next">;</mark></code>
+            <code>++</code>
+            <code>bar</code>
+        </pre>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Грубо говоря: парсер склеивает строки, <b>если может</b>, кроме особых 7-ми случаев</h2>
+    </div></section>
+
+    <section class="slide cover fullscreen-pic"><div>
+        <img src="pictures/robot1.jpg">
+    </div></section>
+
+    <section class="slide"><div>
+        <figure>
+            <blockquote>
+                <p>Стоит всегда использовать <code>===</code> вместо <code>==</code>, потому что строгое сравнение не делает никаких неявных преобразований и приложение ведет себя так, как ожидается</p>
+            </blockquote>
+            <figcaption>Амбициозный js-разработчик</figcaption>
+        </figure>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>== vs ===</h2>
+        <ul>
+            <li>
+                <code>===</code> — строгое сравнение значений (<a href="http://www.ecma-international.org/ecma-262/6.0/#sec-strict-equality-comparison">ecma-262 # Strict Equality Comparison</a>)
+            </li>
+            <li>
+                <code>==</code> — абстрактное сравнение значений (<a href="http://www.ecma-international.org/ecma-262/6.0/#sec-abstract-equality-comparison">ecma-262 # Abstract Equality Comparison</a>)
+            </li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>===</h2>
+        <ul>
+            <li>Одинаковые типы</li>
+            <li>NaN !== *</li>
+            <li>+0 === -0</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Типы</h2>
+        <div class="columns">
+            <div class="column"><ul><li>
+                Value types
+                <ul>
+                    <li>Undefined</li>
+                    <li>Null</li>
+                    <li>Boolean</li>
+                    <li>String</li>
+                    <li>Symbol</li>
+                    <li>Number</li>
+                </ul>
+            </li></ul></div>
+            <div class="column"><ul><li>
+                Reference types
+                <ul>
+                    <li>Object</li>
+                </ul>
+            </li></ul></div>
+        </div>
+        <p class="hint"><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-data-types-and-values">ecma-262 # Data Types and Values</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>typeof val</h2>
+        <table class="fit">
+            <tr>
+                <th>Type of GetValue(val)</th>
+                <th>typeof val</th>
+            </tr>
+            <tr>
+                <td>Null</td>
+                <td>"object"</td>
+            </tr>
+            <tr>
+                <td>Undefined</td>
+                <td>"undefined"</td>
+            </tr>
+            <tr>
+                <td>Boolean</td>
+                <td>"boolean"</td>
+            </tr>
+            <tr>
+                <td>Number</td>
+                <td>"number"</td>
+            </tr>
+            <tr>
+                <td>String</td>
+                <td>"string"</td>
+            </tr>
+            <tr>
+                <td>Symbol</td>
+                <td>"symbol"</td>
+            </tr>
+            <tr>
+                <td>Object</td>
+                <td>"object"</td>
+            </tr>
+            <tr>
+                <td>Object (implements [[Call]])</td>
+                <td>"function"</td>
+            </tr>
+        </table>
+        <p class="hint"><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-typeof-operator">ecma-262 # The typeof Operator</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>x == y</h2>
+        <ul>
+            <li>Если одинаковые типы, return <b>x === y</b></li>
+            <li>undefined == null</li>
+            <li>Если x — <b>String</b> и y — <b>Number</b>, return <b>ToNumber(x) == y</b></li>
+            <li>Если x — <b>Boolean</b>, return <b>ToNumber(x) == y</b></li>
+            <li>Если x — <b>Object</b>, а y — <b>String</b>, <b>Number</b> или <b>Symbol</b>, return <b>ToPrimitive(x) == y</b></li>
+        </ul>
+        <p class="hint"></p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Иными словами, <b>примитивные типы</b> приводятся к <b>Number</b>, а <b>Object</b> — к примитивному (<b>ToPrimitive</b>)</h2>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness">Таблица приведения (mdn)</a></h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Object.is(x, y)</h2>
+        <ul>
+            <li>SameValue сравнение</li>
+            <li>Object.is(NaN, NaN) == true</li>
+            <li>Object.is(-0, +0) == false</li>
+        </ul>
+        <p class="hint"><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-samevalue">ecma-262 # SameValue</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>if (<code>[]</code>) { ... } — выполнится?</h2>
+        <div class="next">
+            <br>
+            <p>ToBoolean(GetValue(expr))</p>
+            <ul>
+                <li>falsy типы: Undefined, Null</li>
+                <li>falsy значения: '', false, NaN, +0, -0</li>
+            </ul>
+            <p class="hint"><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-if-statement">ecma-262 # The if statement</a></p>
+        </div>
+    </div></section>
+
+    <section class="slide cover fullscreen-pic"><div>
+        <img src="pictures/robot2.jpg">
+    </div></section>
+
+    <section class="slide"><div>
+        <figure>
+            <blockquote>
+                <p>Знание этих замечательных фактов не помогает мне понять, почему выражения <code>{}+[]</code>, <code>{}+{}</code>, <code>[]+{}</code> и <code>[]+[]</code> возвращают разный результат. JS — ужасный непредсказуемый язык</p>
+            </blockquote>
+            <figcaption>Уставший js-разработчик</figcaption>
+        </figure>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Оператор сложения (a + b)</h2>
+        <pre class="nonum fit">
+            <code>a_prim = <mark>ToPrimitive</mark>(GetValue(a))</code>
+            <code>b_prim = <mark>ToPrimitive</mark>(GetValue(b))</code>
+            <code>If Type(a_prim) is String or Type(b_prim) is String, then</code>
+            <code>    a_str = ToString(a_prim), b_str = ToString(b_prim)</code>
+            <code>    return <mark>concatenation of a_str and b_str</mark></code>
+            <code>a_num = ToNumber(a_prim), b_num = ToNumber(b_prim)</code>
+            <code>return <mark>addition of a_num and b_num</mark></code>
+        </pre>
+        <p class="hint"><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-addition-operator-plus">ecma-262 # The Addition operator</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>ToPrimitive(input, hint)</h2>
+        <pre class="nonum fit">
+            <code>If Type(input) is not Object, then</code>
+            <code>    return input</code>
+            <code>If hint is 'string', then</code>
+            <code>    return <mark>input.toString()</mark> or input.valueOf()</code>
+            <code>Else,</code>
+            <code>    return input.valueOf() or <mark>input.toString()</mark></code>
+        </pre>
+        <p class="hint"><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-toprimitive">ecma-262 # ToPrimitive</a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2><b>[] + []</b>, <b>[] + {}</b></h2>
+        <pre class="nonum fit">
+            <div class="next">
+            <code>[].toString() == ""</code>
+            <code>({}).toString() == "[object Object]"</code>
+            </div>
+            <div class="next">
+            <code> </code>
+            <code>[] + [] == "" + "" == <mark>""</mark></code>
+            <code>[] + {} == "" + "[object Object]" == <mark>"[object Object]"</mark></code>
+            </div>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2><b>{} + {}</b>, <b>{} + []</b></h2>
+        <pre class="nonum fit">
+            <div class="next">
+            <code>[].toString() == ""</code>
+            <code>({}).toString() == "[object Object]"</code>
+            </div>
+            <div class="next">
+            <code> </code>
+            <code><mark>{}</mark> + {} --> +{}</code>
+            <code><mark>{}</mark> + [] --> +[]</code>
+            </div>
+            <div class="next">
+            <code> </code>
+            <code>+{} == Number({}) == <mark>NaN</mark></code>
+            <code>+[] == Number([]) == <mark>0</mark></code>
+            </div>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Но</h2>
+        <pre>
+            <code>var a = {} + {};</code>
+            <code>a == "[object Object][object Object]"; <mark class="comment">// true</mark></code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Оператор вычитания (a - b)</h2>
+        <pre class="nonum">
+            <code>a_num = ToNumber(GetValue(a))</code>
+            <code>b_num = ToNumber(GetValue(b))</code>
+            <code>return <mark>subtraction of a_num and b_num</mark></code>
+        </pre>
+        <p class="hint"><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-subtraction-operator-minus">ecma-262 # The Subtraction operator</a></p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>А в каком порядке выполняются операторы в выражении?</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Приоритеты</h2>
+        <table class="fit">
+        <tr>
+            <th>Приоритет</th>
+            <th>Тип оператора</th>
+            <th>Ассоциативность</th>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>Grouping: ()</td>
+            <td>n/a</td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td>Member access: … . …</td>
+            <td>слева направо</td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>Function call: … ( … )</td>
+            <td>слева направо</td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>Unary plus: + …</td>
+            <td>справа налево</td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>typeof: typeof …</td>
+            <td>справа налево</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>Addition: … + …</td>
+            <td>слева направо</td>
+        </tr>
+        <tr>
+            <td>...</td>
+            <td>...</td>
+            <td>...</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>Comma / Sequence: … , …</td>
+            <td>слева направо</td>
+        </tr>
+        </table>
+        <p class="hint"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence">mdn # Operator precedence </a></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Ассоциативность</h2>
+        <ul>
+            <li><code>a OP b OP c</code></li>
+            <li>Левая ассоциативность (слева-направо): <code>(a OP b) OP c</code></li>
+            <li>Правая ассоциативность (справа-налево): <code>a OP (b OP c)</code></li>
+        </ul>
+        <p class="next">Например, <code>a = b = 5</code> <==> <code>a = (b = 5)</code></p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>А зачем?</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <pre>
+            <code>if (title == address && address.join(' / ')) {</code>
+            <code>    ...</code>
+            <code>}</code>
+        </pre>
+    </div></section>
+
+    <section class="slide"><div>
+        <pre>
+            <code>if (title == <mark>(</mark>address && address.join(' / ')<mark>)</mark>) {</code>
+            <code>    ...</code>
+            <code>}</code>
+        </pre>
+        <ul>
+            <li><code>==</code> 10 LTR</li>
+            <li><code>&&</code> 6 LTR</li>
+        </ul>
+    </div></section>
+
+    <section class="slide cover fullscreen-pic"><div>
+        <img src="pictures/robot3.jpg">
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Бонус</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Решите уравнение:</h2>
+        <p><code>x + "" == undefined</code></p>
+        <pre>
+            <code class="next">x == undefined - ""</code>
+            <code class="next">x == NaN - 0</code>
+            <code class="next">x == NaN</code>
+        </pre>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Шутка. Такого не может быть. <br/> <strong class="next">Ведь NaN != NaN</strong></h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Вывод</h2>
+        <ul>
+            <li><a href="http://www.ecma-international.org/ecma-262/6.0/">ecma-international.org/ecma-262/6.0/</a></li>
+            <li><a href="https://developer.mozilla.org/">developer.mozilla.org</a></li>
+            <li><a href="http://www.2ality.com/">2ality.com</a></li>
+        </ul>
+        <p class="next">Вопросы?</p>
+    </div></section>
+
+    <div class="progress"><div></div></div>
+    <script src="../shower/shower.min.js"></script>
+</body>
+</html>
