@@ -120,6 +120,8 @@
 
     <section class="slide shout"><div>
         <h2>Javascript</h2>
+
+        <footer>JS — язык, порождаемый контекстно-свободной грамматикой.</footer>
     </div></section>
 
     <section class="slide"><div>
@@ -131,6 +133,7 @@
             <li>ASI</li>
         </ul>
         <p class="note"><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-syntactic-grammar">ecma-262 # The Syntactic Grammar</a>, <br><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Lexical_grammar">mdn # Lexical grammar</a></p>
+        <footer>Всё, что не является whitespace или комментариями, называется токеном ECMAScript. Токены — ключевые слова, идентификаторы, литералы и пунктуаторы.</footer>
     </div></section>
 
     <section class="slide"><div>
@@ -270,6 +273,7 @@
 
     <section class="slide shout"><div>
         <h2>ASI</h2>
+        <footer>Automatic Semicolon Insertion. </footer>
     </div></section>
 
     <section class="slide"><div>
@@ -311,11 +315,12 @@
     </div></section>
 
     <section class="slide"><div>
-        <h2>Исключение: токен не может продолжить инструкцию</h2>
+        <h2>Исключение: токен не может продолжить инструкцию*</h2>
         <pre>
             <code>var a = 1<mark>;</mark></code>
             <code>console.log(a)</code>
         </pre>
+        <p class="note">* должна быть } или хотя бы один lineTerminator</p>
     </div></section>
 
     <section class="slide"><div>
@@ -742,9 +747,12 @@
         <ul>
             <li><a href="http://www.ecma-international.org/ecma-262/6.0/">ecma-international.org/ecma-262/6.0/</a></li>
             <li><a href="https://developer.mozilla.org/">developer.mozilla.org</a></li>
-            <li><a href="http://www.2ality.com/">2ality.com</a></li>
+            <li><a href="http://www.2ality.com/">2ality.com</a><br><br></li>
+            <li><a href="http://lastw.github.io/talks/javascript-syntax/">this</a></li>
         </ul>
         <p class="next">Вопросы?</p>
+
+        <footer>Вывод: нужно избавляться от непонимания. Иногда лучше полностью осознать и исследовать что-то старое, чем узнать что-то новое. В спецификации есть ответы на большинство вопросов.</footer>
     </div></section>
 
     <div class="progress"><div></div></div>
