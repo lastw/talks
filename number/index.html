@@ -1,0 +1,594 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Number</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=792, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="../shower/themes/bright/styles/screen.css">
+
+    <style>
+        .slide.shout {
+            background: #fff;
+            }
+
+        .slide.shout h2 {
+            color: #000;
+            text-align: center;
+            font-size: 48px;
+            }
+        .slide.shout h2 a {
+            color: #52a2df
+            }
+
+        .columns {
+            display: flex;
+            }
+            .column {
+                flex: 1;
+                }
+
+        .slide pre {
+            margin-top: 45px;
+            }
+        .slide pre.fit {
+            margin-top: 0;
+            }
+
+        pre.nonum code:before {
+            content: none;
+            }
+
+        mark.ok {
+            color: #fff;
+            background: #0f0;
+            }
+
+        mark.error {
+            color: #fff;
+            background: #f00;
+            }
+
+        .fullscreen-pic img {
+            min-width: 100%;
+            min-height: 100%;
+            }
+
+        .slide p.big {
+            font-size: 36px;
+            }
+
+        .math b {
+            color: #009;
+            }
+
+        .slide b.mark {
+            color: #c00;
+            }
+
+        .slide p.monospace {
+            font-family: monospace;
+            }
+
+        .slide b.error {
+            color: #f00;
+            }
+
+        code[data-length] {
+            position: relative;
+            }
+
+        code[data-length]:after {
+            position: absolute;
+            content: attr(data-length);
+            left: 0;
+            right: 0;
+            bottom: -8px;
+            border: 2px solid #333;
+            border-top: none;
+            text-align: center;
+            height: 6px;
+            line-height: 44px;
+            }
+
+        .slide.frame img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            -webkit-filter: grayscale(1);
+            }
+
+        .slide.frame:after {
+            display: none;
+            }
+    </style>
+</head>
+<body class="list">
+    <header class="caption">
+        <h1>Number</h1>
+        <p>in javascript</p>
+    </header>
+    <section class="slide cover" id="Cover"><div>
+        <img src="pictures/cover.jpg" alt="">
+        <style>
+            #Cover img {
+                width: 100%;
+                right: 0;
+                left: auto;
+                }
+        </style>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Number</h2>
+        <ul>
+            <li class="next">0.1 + 0.2 !== 0.3</li>
+            <li class="next">Number.MAX_SAFE_INTEGER</li>
+            <li class="next">Что делать?</li>
+        </ul>
+    </div></section>
+
+    <section class="slide" id="Pi"><div>
+        <h2>π (Пи)</h2>
+        <p class="big">
+            3.14
+            <span class="next">15</span>
+            <span class="next">92</span>
+            <span class="next">65</span>
+            <span class="next">35...</span>
+        </p>
+        <style>
+            #Pi span {
+                color: inherit;
+                opacity: .8;
+                }
+            #Pi span + span {
+                opacity: .6;
+                }
+            #Pi span + span + span {
+                opacity: .4;
+                }
+            #Pi span + span + span + span {
+                opacity: .2;
+                }
+        </style>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>N<sub>A</sub> (Число Авогадро)</h2>
+        <p class="next big">
+            6.022 * 10<sup>23</sup>
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Стандартная (научная) форма записи числа</h2>
+        <ul>
+            <li>6.022 * 10<sup>23</sup></li>
+            <li class="next">6.02214129 * 10<sup>23</sup></li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Стандартная (научная) форма записи числа</h2>
+        <p class="big">
+            D<sub>1</sub>.D<sub>2</sub>D<sub>3</sub>D<sub>4</sub>...D<sub>P</sub> * B<sup>E</sup>
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Стандартная (научная) форма записи числа</h2>
+        <p class="big math">
+            <b>D<sub>1</sub>.D<sub>2</sub>D<sub>3</sub>D<sub>4</sub>...D<sub>P</sub></b> * B<sup>E</sup>
+        </p>
+        <p>
+            D<sub>1</sub>.D<sub>2</sub>D<sub>3</sub>D<sub>4</sub>...D<sub>P</sub> — мантисса
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Стандартная (научная) форма записи числа</h2>
+        <p class="big math">
+            D<sub>1</sub>.D<sub>2</sub>D<sub>3</sub>D<sub>4</sub>...D<sub><b>P</b></sub> * B<sup>E</sup>
+        </p>
+        <p>
+            P — точность
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Стандартная (научная) форма записи числа</h2>
+        <p class="big math">
+            D<sub>1</sub>.D<sub>2</sub>D<sub>3</sub>D<sub>4</sub>...D<sub>P</sub> * <b>B</b><sup>E</sup>
+        </p>
+        <p>
+            B — основание
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Стандартная (научная) форма записи числа</h2>
+        <p class="big math">
+            D<sub>1</sub>.D<sub>2</sub>D<sub>3</sub>D<sub>4</sub>...D<sub>P</sub> * B<sup><b>E</b></sup>
+        </p>
+        <p>
+            E — экспонента
+        </p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>BASE-2</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Десятичная дробь</h2>
+        <p class="big math">
+            1.234
+        </p>
+        <p>
+            <b>1</b> + <b>2</b> * <sup>1</sup>/<sub>10</sub> + <b>3</b> * <sup>1</sup>/<sub>100</sub> + <b>4</b> * <sup>1</sup>/<sub>1000</sub>
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Двоичная дробь</h2>
+        <p class="big math">
+            1.101
+        </p>
+        <p>
+            <b>1</b> + <b>1</b> * <sup>1</sup>/<sub>2</sub> + <b>1</b> * <sup>1</sup>/<sub>8</sub> <span class="next">= 1.625<sub>(10)</sub></span>
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>0.75<sub>(10)</sub> = ?<sub>(2)</sub></h2>
+        <p>
+            0.75<sub>(10)</sub> = 3/4<sub>(10)</sub> = 11/100<sub>(2)</sub>
+        </p>
+    </div></section>
+
+    <section class="slide frame"><div>
+        <img src="pictures/ld/1-1.jpg">
+        <img class="next" src="pictures/ld/1-2.jpg">
+        <img class="next" src="pictures/ld/1-3.jpg">
+        <img class="next" src="pictures/ld/1-4.jpg">
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>0.75<sub>(10)</sub> = 0.11<sub>(2)</sub></h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>0.1<sub>(10)</sub> = ?<sub>(2)</sub></h2>
+        <p>
+            0.1<sub>(10)</sub> = 1/10<sub>(10)</sub> = 1/1010<sub>(2)</sub>
+        </p>
+
+    </div></section>
+
+    <section class="slide frame"><div>
+        <img src="pictures/ld/2-1.jpg">
+        <img class="next" src="pictures/ld/2-2.jpg">
+        <img class="next" src="pictures/ld/2-3.jpg">
+        <img class="next" src="pictures/ld/2-4.jpg">
+        <img class="next" src="pictures/ld/2-5.jpg">
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>0.1<sub>(10)</sub> = 0.0(0011)<sub>(2)</sub></h2>
+    </div></section>
+
+
+
+    <section class="slide shout"><div>
+        <h2>IEEE 754</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Double-precision binary floating-point format: binary64</h2>
+        <img src="pictures/binary64.png"/>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>0.1</h2>
+        <p>0.000110011001100110011001100110011001100110011001100</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>0.2</h2>
+        <p>0.001100110011001100110011001100110011001100110011001</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>0.1 + 0.2</h2>
+        <p class="monospace">
+            &nbsp;&nbsp;0.000110011001100110011001100110011001100110011001100<br>
+            +&nbsp;0.001100110011001100110011001100110011001100110011001<br>
+            =&nbsp;0.0100110011001100110011001100110011001100110011001<b class="error">01</b>
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>0.1 + 0.2</h2>
+        <p class="big">
+            0.0(1001) - <b class="error"><sup>1</sup>/<sub>2<sup>51</sup></sub></b>
+        </p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Точность → Погрешность</h2>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>0.1 + 0.2 = <span class="next">0.30000000000000004</span></h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Нормализованная форма</h2>
+        <div class="columns">
+            <div class="column">
+                В математике:<br>
+                <b>1 ≤ m < 10</b><br>
+                <br>
+                6.022140857 * 10<sup>23</sup>
+            </div>
+            <div class="column">
+                binary64:<br>
+                <b>1 ≤ m < 10<sub>(2)</sub></b><br>
+                <br>
+                1.111111100<sup>(2)</sup> * 2<sup>78</sup>
+            </div>
+        </div>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Нормализованная форма</h2>
+        <p class="big math">
+            <b>1</b>.D<sub>1</sub>D<sub>2</sub>D<sub>3</sub>...D<sub>P</sub> * B<sup>E</sup>
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>binary64</h2>
+        <img src="pictures/binary64.png"/>
+        <div class="columns">
+            <div class="column">
+                <p class="big">
+                    (-1)<sup>S</sup> * M * 2<sup>E</sup>
+                </p>
+            </div>
+            <div class="column">
+                <ul>
+                    <li><b>S</b>: 1 бит</li>
+                    <li><b>2<sup>E</sup></b>: 11 бит</li>
+                    <li><b>M</b>: 52 бита</li>
+                </ul>
+            </div>
+        </div>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>S — знак (1 бит)</h2>
+        <p><code>0</code> — положительный,<br><code>1</code> — отрицательный</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>2<sup>E</sup>— экспонента (11 бит)</h2>
+        <p>
+            <code>00000000000</code> → <b>-1023<sub>(10)</sub></b><br>
+            <code>11111111111</code> → <b>1024<sub>(10)</b></sub>
+        </p>
+        <p>(сдвиг на 1023)</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>M — мантисса (52 бита)</h2>
+        <p>M = <code data-length="53">1.mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</code></p>
+        <p>(плюс один захардкоженный старший бит, итого 53)</p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Целые числа</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Старший бит всегда 1? <span class="next">Ок!</span></h2>
+        <p>
+            <div class="next">1.<code>000..000</code> * 2<sup>0</sup> = 1</div>
+            <div class="next">1.<code>000..000</code> * 2<sup>1</sup> = 10<sub>(2)</sub> = 2</div>
+            <div class="next">1.<code>100..000</code> * 2<sup>1</sup> = 11<sub>(2)</sub> = 3</div>
+            <div class="next">
+                ...<br>
+                1.<code data-length="52">111..111</code> * 2<sup>52</sup> = 1111..111<sub>(2)</sub> = <b>2<sup>53</sup>-1</b>
+            </div>
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>А 2<sup>53</sup>? <span class="next">Легко!</span></h2>
+        <p>
+            <div class="next">1.<code data-length="52">000..000</code> * 2<sup><b>53</b></sup> = 1000..000<b>0</b><sub>(2)</sub> = <b>2<sup>53</sup></b></div>
+        </p>
+        <p class="next">А как же Number.MAX_SAFE_INTEGER?</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>2<sup>53</sup>+1</h2>
+        <p>
+            <div class="next">2<sup>53</sup>+1 = 1000..000<b>1</b><sub>(2)</sub> = 1.<code data-length="52">000..000</code>1 * 2<sup><b>53</b></sup> = 2<sup><b>53</b></div>
+        </p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>2<sup>54</sup> = 2<sup>54</sup>+1 = 2<sup>54</sup>+2</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Number.MAX_SAFE_INTEGER</h2>
+        <p>Максимальное целое значение, <b>однозначно</b> определяющее <b>единственное</b> целое число</p>
+        <p class="next big">2<sup>53</sup>-1</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Старший бит всегда 1...</h2>
+        <p>
+            <div>1.<code>000..000</code> * 2<sup>0</sup> = 1</div>
+            <div>
+                ...<br>
+                1.<code>111..111</code> * 2<sup>52</sup> = 1111..111<sub>(2)</sub> = <b>2<sup>53</sup>-1</b>
+            </div>
+        </p>
+        <p class="next">... а как представить ноль?</p>
+    </div></section>
+
+
+    <section class="slide shout"><div>
+        <h2>Экспонента</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Специальные значения экспоненты</h2>
+        <p><b>E</b> = <code data-length="11">00000000000</code>, <b>M</b> = 1.<code data-length="52">000...000</code></p>
+        <p class="big">+0 / -0</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Специальные значения экспоненты</h2>
+        <p><b>E</b> = <code data-length="11">11111111111</code>, <b>M</b> = 1.<code data-length="52">000...000</code></p>
+        <p class="big">Infinity / -Infinity</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Специальные значения экспоненты</h2>
+        <p><b>E</b> = <code data-length="11">11111111111</code>, <b>M</b> <b class="mark">></b> 1.<code data-length="52">000...000</code></p>
+        <p class="big">NaN</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Специальные значения экспоненты</h2>
+        <p><b>E</b> = <code data-length="11">00000000000</code>, <b>M</b> <b class="mark">></b> <b class="mark">0</b>.<code data-length="52">000...000</code></p>
+        <p class="big">E → -1022, денормализованные числа</p>
+    </div></section>
+
+
+    <section class="slide"><div>
+        <h2>Денормализованные числа</h2>
+        <p>
+            <div>Самое маленькое нормализованное число:</div>
+            <div class="next">1.0 * 2<sup>-1022</sup></div>
+        </p>
+        <p>
+            <div class="next">Самое большое денормализованное число:</div>
+            <div class="next">0.1111111111... * 2<sup>-1022</sup></div>
+            <div class="next"><i>(нет разрыва)</i></div>
+        </p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Итого</h2>
+        <ul>
+            <li>-1023 < E < 1024</li>
+            <li class="next">E = 1024:
+                <ul>
+                    <li>Infinity</li>
+                    <li>NaN</li>
+                </ul>
+            </li>
+            <li class="next">E = -1023:
+                <ul>
+                    <li>0</li>
+                    <li>0.xxx * 2<sup>-1022</sup></li>
+                </ul>
+            </li>
+        </ul>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Проблемы</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Проблемы</h2>
+        <ul>
+            <li>Потеря точности больших чисел</li>
+            <li>Потеря точности при округлении бесконечных дробей</li>
+            <li>Переполнение (Infinity), "недополнение" (0)</li>
+        </ul>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Решение</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>1. Работаем только с безопасными числами</h2>
+        <p><i>Если A и B безопасны, (A op B) не обязательно безопасно!</i></p>
+        <p class="next">Нужно гарантировать, что оба операнда и результат (A op B) будут иметь корректное значение на всей области определения</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>2. Библиотеки</h2>
+        <p>
+            Например,<br>
+            <a href="https://www.npmjs.com/package/big-integer">https://www.npmjs.com/package/big-integer</a>,<br>
+            <a href="https://github.com/LarryBattle/Ratio.js">https://github.com/LarryBattle/Ratio.js</a>
+        </p>
+        <p class="next">Ими же можно тестировать корректность значений из п.1</p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>3. Эпсилон для сравнения</h2>
+        <p>
+            <del>0.1 + 0.2 == 0.3</del><br>
+            0.3 - 2<sup>-52</sup> < 0.1 + 0.2 < 0.3 + 2<sup>-52</sup></code>
+        </p>
+        <p class="next">Или <code>Number.EPSILON</code></p>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>4. Длинная арифметика</h2>
+        <p>
+            Для тривиальных задач можно работать со строками<br>(но лучше не надо)
+        </p>
+    </div></section>
+
+    <section class="slide shout"><div>
+        <h2>Бонус</h2>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>ECMA-262 # <a href="http://www.ecma-international.org/ecma-262/6.0/#sec-ecmascript-language-types-number-type">The Number Type</a></h2>
+        <ul>
+            <li class="next">E ∈ [-1074, 971]</li>
+            <li class="next">M ∈ [2<sup>52</sup>, 2<sup>53</sup>) — никакой точки</li>
+            <li class="next">Некоторые операторы конвертируют в Int32: например, <code>>></code></li>
+            <li class="next">Длина Array — UInt32</li>
+            <li class="next">Всего у Number 18437736874454810627 значений</li>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Вывод</h2>
+        <ul>
+            <li class="next">Результат вычислений не всегда точен</li>
+            <li class="next">Есть безопасные значения</li>
+            <li class="next">Нужно быть внимательным к Number</li>
+            <li class="next">Для запуска ракет лучше выбрать что-то другое</li>
+        </ul>
+    </div></section>
+
+    <section class="slide"><div>
+        <h2>Вопросы?</h2>
+            <ul>
+                <li><a href="http://blog.chewxy.com/2014/02/24/what-every-javascript-developer-should-know-about-floating-point-numbers/">What Every JavaScript Developer Should Know About Floating Point Numbers</a></li>
+                <li><a href="http://www.2ality.com/2012/04/number-encoding.html">How numbers are encoded in JavaScript</a></li>
+                <li><a href="http://www.2ality.com/2013/10/safe-integers.html">Safe integers in JavaScript</a><br><br></li>
+                <li><a href="http://lastw.github.io/talks/number">this</a></li>
+            </ul>
+    </div></section>
+
+    <div class="progress"><div></div></div>
+    <script src="../shower/shower.min.js"></script>
+</body>
+</html>
